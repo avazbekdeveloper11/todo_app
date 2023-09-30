@@ -12,7 +12,14 @@ class CalendarState with _$CalendarState {
     @Default(0) int dayNumber,
     @Default(0) int currentMonthLenth,
     @Default(0) int prevMonthLenth,
+    @Default(0) int currentMonth,
+    @Default(0) int currentYear,
+    @Default(0) int currentDayNumber,
+    @Default(0) int? currentday,
     @Default('') String? dayName,
     @Default('') String? monthName,
+    @Default('') String? currentMonthName,
+    @Default('') String? currentDayName,
+    
   }) = _CalendarState;
 }

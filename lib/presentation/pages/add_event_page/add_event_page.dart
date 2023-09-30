@@ -18,32 +18,23 @@ class _AddEventPageState extends State<AddEventPage> {
   late FocusNode focusNode;
 
   @override
-  void initState() {
-    focusNode = FocusNode();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    focusNode.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return OnUnFocusTap(
       child: ThemeWrapper(
         builder: (context, colors, fonts, icons, controller) {
           return Scaffold(
             backgroundColor: colors.backgroundColor,
-            body: SafeArea(
+            body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 16.h, bottom: 32.h),
+                      padding: EdgeInsets.only(
+                        top: 40.h,
+                        bottom: 32.h,
+                      ),
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: SvgPicture.asset(icons.arrowLeft),
@@ -107,6 +98,9 @@ class _AddEventPageState extends State<AddEventPage> {
                     CustomTextField(
                       title: 'event_time'.tr(),
                     ),
+                    SizedBox(
+                      height: MediaQuery.of(context).viewInsets.bottom,
+                    ),
                   ],
                 ),
               ),
@@ -123,5 +117,17 @@ class _AddEventPageState extends State<AddEventPage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    focusNode = FocusNode();
+    super.initState();
   }
 }

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
 import 'package:todo_app/presentation/components/buttons/custom_buttons.dart';
@@ -14,15 +17,8 @@ class CalendarWiget extends StatefulWidget {
 }
 
 class _CalendarWigetState extends State<CalendarWiget> {
-  // late DateTime dateTime;
-  // late int year;
-  // late int month;
-  // late int day;
-  // late int monthLength;
-  // late String dayName;
-  // late int dayNumber;
-  // late int? prevMonthLenth;
   List months = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  Timer? _searchTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -51,51 +47,24 @@ class _CalendarWigetState extends State<CalendarWiget> {
                   const Spacer(),
                   CustomCircleButton(
                     onTap: () {
-                      // setState(
-                      //   () {
-                      //     month -= 1;
-                      //     dayName = DateFormat('EEEE').format(dateTime.copyWith(
-                      //         day: 1, month: month, year: year));
-                      //     dayNumber = weekOfDay(dayName);
-                      //     monthLength =
-                      //         DateTime(year, DateTime(year, month).month + 1, 0)
-                      //             .day;
-                      //     prevMonthLenth = DateTime(
-                      //             year, DateTime(year, month - 1).month + 1, 0)
-                      //         .day;
-                      //   },
-                      // );
+                      context.read<CalendarBloc>().add(
+                            const CalendarEvent.backMonth(),
+                          );
                     },
                     icon: Icons.keyboard_arrow_left,
                   ),
                   SizedBox(width: 10.w),
                   CustomCircleButton(
                     onTap: () {
-                      // setState(() {
-                      //   month += 1;
-                      //   dayName = DateFormat('EEEE').format(
-                      //     dateTime.copyWith(
-                      //       day: 1,
-                      //       month: month,
-                      //       year: year,
-                      //     ),
-                      //   );
-                      //   dayNumber = weekOfDay(dayName);
-                      //   monthLength =
-                      //       DateTime(year, DateTime(year, month).month + 1, 0)
-                      //           .day;
-                      //   prevMonthLenth = DateTime(
-                      //           year, DateTime(year, month - 1).month + 1, 0)
-                      //       .day;
-                      // });
+                      context.read<CalendarBloc>().add(
+                            const CalendarEvent.nextMonth(),
+                          );
                     },
                     icon: Icons.keyboard_arrow_right,
                   )
                 ],
               ),
             ),
-            //
-
             GridView.builder(
               itemCount: 7,
               shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
@@ -115,42 +84,57 @@ class _CalendarWigetState extends State<CalendarWiget> {
                 );
               },
             ),
-            //
-
-            GridView.builder(
-              itemCount: widget.state.dayNumber < 5 &&
-                      widget.state.currentMonthLenth > 31
-                  ? 37
-                  : 42,
-              shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 7,
-              ),
-              padding: EdgeInsets.only(left: 18.w, right: 14.w),
-              //
-              itemBuilder: (context, index) {
-                if ((widget.state.dayNumber - 2) < index &&
-                    (widget.state.currentMonthLenth +
-                            (widget.state.dayNumber - 1)) >
-                        index) {
-                  return Center(
-                    child: Text(
-                      '${index - (widget.state.dayNumber - 2)}',
-                      style: fonts.medium14.copyWith(fontSize: 12.sp),
-                    ),
-                  );
-                } else {
-                  return Center(
-                    child: Text(
-                      '${(widget.state.dayNumber - 2) >= index ? (widget.state.prevMonthLenth - (widget.state.dayNumber - index - 2)) : ((index + 1) - (widget.state.currentMonthLenth + (widget.state.dayNumber - 1)))}',
-                      style: fonts.medium14.copyWith(
-                        fontSize: 12.sp,
-                        color: colors.grey,
-                      ),
-                    ),
-                  );
-                }
+            GestureDetector(
+              onHorizontalDragUpdate: (DragUpdateDetails details) {
+                _searchTimer!.cancel();
+                _searchTimer = Timer(
+                  const Duration(milliseconds: 50),
+                  () {
+                    if (details.delta.direction == 0) {
+                      context.read<CalendarBloc>().add(
+                            const CalendarEvent.backMonth(),
+                          );
+                    } else {
+                      context.read<CalendarBloc>().add(
+                            const CalendarEvent.nextMonth(),
+                          );
+                    }
+                  },
+                );
               },
+              child: GridView.builder(
+                itemCount: 42,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 7),
+                padding: EdgeInsets.only(left: 18.w, right: 14.w),
+                itemBuilder: (context, index) {
+                  if ((widget.state.dayNumber - 2) < index &&
+                      (widget.state.currentMonthLenth +
+                              (widget.state.dayNumber - 1)) >
+                          index) {
+                    return GestureDetector(
+                      child: Center(
+                        child: Text(
+                          '${index - (widget.state.dayNumber - 2)}',
+                          style: fonts.medium14.copyWith(fontSize: 12.sp),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Center(
+                      child: Text(
+                        '${(widget.state.dayNumber - 2) >= index ? (widget.state.prevMonthLenth - (widget.state.dayNumber - index - 2)) : ((index + 1) - (widget.state.currentMonthLenth + (widget.state.dayNumber - 1)))}',
+                        style: fonts.medium14.copyWith(
+                          fontSize: 12.sp,
+                          color: colors.grey,
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           ],
         );
@@ -158,37 +142,15 @@ class _CalendarWigetState extends State<CalendarWiget> {
     );
   }
 
-  // @override
-  // void initState() {
-  //   dateTime = DateTime.now();
-  //   day = dateTime.day;
-  //   month = dateTime.month;
-  //   year = dateTime.year;
-  //   dayName = DateFormat('EEEE').format(dateTime.copyWith(day: 1));
-  //   dayNumber = weekOfDay(dayName);
-  //   monthLength = DateTime(year, DateTime(year, month).month + 1, 0).day;
-  //   prevMonthLenth = DateTime(year, DateTime(year, month - 1).month + 1, 0).day;
-  //   super.initState();
-  // }
+  @override
+  void dispose() {
+    _searchTimer!.cancel();
+    super.dispose();
+  }
 
-  // int weekOfDay(String dayName) {
-  //   switch (dayName) {
-  //     case 'Sunday':
-  //       return 1;
-  //     case 'Monday':
-  //       return 2;
-  //     case 'Tuesday':
-  //       return 3;
-  //     case 'Wednesday':
-  //       return 4;
-  //     case 'Thursday':
-  //       return 5;
-  //     case 'Friday':
-  //       return 6;
-  //     case 'Saturday':
-  //       return 7;
-  //     default:
-  //       return 0;
-  //   }
-  // }
+  @override
+  void initState() {
+    _searchTimer = Timer(Duration.zero, () {});
+    super.initState();
+  }
 }

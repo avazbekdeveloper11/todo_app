@@ -19,25 +19,29 @@ class CalendarPage extends StatelessWidget {
           builder: (context, colors, fonts, icons, controller) {
             return Scaffold(
               backgroundColor: colors.backgroundColor,
-              body: SafeArea(
-                child: CustomScrollView(
-                  slivers: [
-                    AppbarWidget(state: state),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          CalendarWiget(state: state),
-                          SizedBox(height: 28.h),
-                          const AddEventWidget(),
-                          SizedBox(height: 20.h),
-                          const CardsBuilder(),
-                          SizedBox(height: 20.h),
+              body: state.currentMonthLenth != 0
+                  ? SafeArea(
+                      child: CustomScrollView(
+                        slivers: [
+                          AppbarWidget(state: state),
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                CalendarWiget(state: state),
+                                SizedBox(height: 28.h),
+                                const AddEventWidget(),
+                                SizedBox(height: 20.h),
+                                const CardsBuilder(),
+                                SizedBox(height: 20.h),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     )
-                  ],
-                ),
-              ),
+                  : const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
             );
           },
         );

@@ -24,11 +24,11 @@ class AppbarWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                state.dayName ?? '',
+                state.currentDayName ?? '',
                 style: fonts.semiBold14,
               ),
               Text(
-                '${state.day} ${DateFormat.MMMM().format(DateTime(state.month, state.month))} ${state.year}',
+                '${state.currentday} ${DateFormat.MMMM().format(DateTime(state.currentYear, state.currentMonth))} ${state.currentYear}',
                 style: fonts.regular12.copyWith(fontSize: 10),
               ),
             ],

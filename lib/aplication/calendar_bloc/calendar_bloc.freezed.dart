@@ -19,32 +19,44 @@ mixin _$CalendarEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initDate,
+    required TResult Function() nextMonth,
+    required TResult Function() backMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initDate,
+    TResult? Function()? nextMonth,
+    TResult? Function()? backMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initDate,
+    TResult Function()? nextMonth,
+    TResult Function()? backMonth,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitDate value) initDate,
+    required TResult Function(_NextMonth value) nextMonth,
+    required TResult Function(_BackMonth value) backMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitDate value)? initDate,
+    TResult? Function(_NextMonth value)? nextMonth,
+    TResult? Function(_BackMonth value)? backMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitDate value)? initDate,
+    TResult Function(_NextMonth value)? nextMonth,
+    TResult Function(_BackMonth value)? backMonth,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +119,8 @@ class _$InitDateImpl implements _InitDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initDate,
+    required TResult Function() nextMonth,
+    required TResult Function() backMonth,
   }) {
     return initDate();
   }
@@ -115,6 +129,8 @@ class _$InitDateImpl implements _InitDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initDate,
+    TResult? Function()? nextMonth,
+    TResult? Function()? backMonth,
   }) {
     return initDate?.call();
   }
@@ -123,6 +139,8 @@ class _$InitDateImpl implements _InitDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initDate,
+    TResult Function()? nextMonth,
+    TResult Function()? backMonth,
     required TResult orElse(),
   }) {
     if (initDate != null) {
@@ -135,6 +153,8 @@ class _$InitDateImpl implements _InitDate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitDate value) initDate,
+    required TResult Function(_NextMonth value) nextMonth,
+    required TResult Function(_BackMonth value) backMonth,
   }) {
     return initDate(this);
   }
@@ -143,6 +163,8 @@ class _$InitDateImpl implements _InitDate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitDate value)? initDate,
+    TResult? Function(_NextMonth value)? nextMonth,
+    TResult? Function(_BackMonth value)? backMonth,
   }) {
     return initDate?.call(this);
   }
@@ -151,6 +173,8 @@ class _$InitDateImpl implements _InitDate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitDate value)? initDate,
+    TResult Function(_NextMonth value)? nextMonth,
+    TResult Function(_BackMonth value)? backMonth,
     required TResult orElse(),
   }) {
     if (initDate != null) {
@@ -165,6 +189,222 @@ abstract class _InitDate implements CalendarEvent {
 }
 
 /// @nodoc
+abstract class _$$NextMonthImplCopyWith<$Res> {
+  factory _$$NextMonthImplCopyWith(
+          _$NextMonthImpl value, $Res Function(_$NextMonthImpl) then) =
+      __$$NextMonthImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NextMonthImplCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$NextMonthImpl>
+    implements _$$NextMonthImplCopyWith<$Res> {
+  __$$NextMonthImplCopyWithImpl(
+      _$NextMonthImpl _value, $Res Function(_$NextMonthImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NextMonthImpl implements _NextMonth {
+  const _$NextMonthImpl();
+
+  @override
+  String toString() {
+    return 'CalendarEvent.nextMonth()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NextMonthImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initDate,
+    required TResult Function() nextMonth,
+    required TResult Function() backMonth,
+  }) {
+    return nextMonth();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initDate,
+    TResult? Function()? nextMonth,
+    TResult? Function()? backMonth,
+  }) {
+    return nextMonth?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initDate,
+    TResult Function()? nextMonth,
+    TResult Function()? backMonth,
+    required TResult orElse(),
+  }) {
+    if (nextMonth != null) {
+      return nextMonth();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitDate value) initDate,
+    required TResult Function(_NextMonth value) nextMonth,
+    required TResult Function(_BackMonth value) backMonth,
+  }) {
+    return nextMonth(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitDate value)? initDate,
+    TResult? Function(_NextMonth value)? nextMonth,
+    TResult? Function(_BackMonth value)? backMonth,
+  }) {
+    return nextMonth?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitDate value)? initDate,
+    TResult Function(_NextMonth value)? nextMonth,
+    TResult Function(_BackMonth value)? backMonth,
+    required TResult orElse(),
+  }) {
+    if (nextMonth != null) {
+      return nextMonth(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NextMonth implements CalendarEvent {
+  const factory _NextMonth() = _$NextMonthImpl;
+}
+
+/// @nodoc
+abstract class _$$BackMonthImplCopyWith<$Res> {
+  factory _$$BackMonthImplCopyWith(
+          _$BackMonthImpl value, $Res Function(_$BackMonthImpl) then) =
+      __$$BackMonthImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BackMonthImplCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$BackMonthImpl>
+    implements _$$BackMonthImplCopyWith<$Res> {
+  __$$BackMonthImplCopyWithImpl(
+      _$BackMonthImpl _value, $Res Function(_$BackMonthImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$BackMonthImpl implements _BackMonth {
+  const _$BackMonthImpl();
+
+  @override
+  String toString() {
+    return 'CalendarEvent.backMonth()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$BackMonthImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initDate,
+    required TResult Function() nextMonth,
+    required TResult Function() backMonth,
+  }) {
+    return backMonth();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initDate,
+    TResult? Function()? nextMonth,
+    TResult? Function()? backMonth,
+  }) {
+    return backMonth?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initDate,
+    TResult Function()? nextMonth,
+    TResult Function()? backMonth,
+    required TResult orElse(),
+  }) {
+    if (backMonth != null) {
+      return backMonth();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitDate value) initDate,
+    required TResult Function(_NextMonth value) nextMonth,
+    required TResult Function(_BackMonth value) backMonth,
+  }) {
+    return backMonth(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitDate value)? initDate,
+    TResult? Function(_NextMonth value)? nextMonth,
+    TResult? Function(_BackMonth value)? backMonth,
+  }) {
+    return backMonth?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitDate value)? initDate,
+    TResult Function(_NextMonth value)? nextMonth,
+    TResult Function(_BackMonth value)? backMonth,
+    required TResult orElse(),
+  }) {
+    if (backMonth != null) {
+      return backMonth(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BackMonth implements CalendarEvent {
+  const factory _BackMonth() = _$BackMonthImpl;
+}
+
+/// @nodoc
 mixin _$CalendarState {
   int get day => throw _privateConstructorUsedError;
   int get month => throw _privateConstructorUsedError;
@@ -172,8 +412,14 @@ mixin _$CalendarState {
   int get dayNumber => throw _privateConstructorUsedError;
   int get currentMonthLenth => throw _privateConstructorUsedError;
   int get prevMonthLenth => throw _privateConstructorUsedError;
+  int get currentMonth => throw _privateConstructorUsedError;
+  int get currentYear => throw _privateConstructorUsedError;
+  int get currentDayNumber => throw _privateConstructorUsedError;
+  int? get currentday => throw _privateConstructorUsedError;
   String? get dayName => throw _privateConstructorUsedError;
   String? get monthName => throw _privateConstructorUsedError;
+  String? get currentMonthName => throw _privateConstructorUsedError;
+  String? get currentDayName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CalendarStateCopyWith<CalendarState> get copyWith =>
@@ -193,8 +439,14 @@ abstract class $CalendarStateCopyWith<$Res> {
       int dayNumber,
       int currentMonthLenth,
       int prevMonthLenth,
+      int currentMonth,
+      int currentYear,
+      int currentDayNumber,
+      int? currentday,
       String? dayName,
-      String? monthName});
+      String? monthName,
+      String? currentMonthName,
+      String? currentDayName});
 }
 
 /// @nodoc
@@ -216,8 +468,14 @@ class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
     Object? dayNumber = null,
     Object? currentMonthLenth = null,
     Object? prevMonthLenth = null,
+    Object? currentMonth = null,
+    Object? currentYear = null,
+    Object? currentDayNumber = null,
+    Object? currentday = freezed,
     Object? dayName = freezed,
     Object? monthName = freezed,
+    Object? currentMonthName = freezed,
+    Object? currentDayName = freezed,
   }) {
     return _then(_value.copyWith(
       day: null == day
@@ -244,6 +502,22 @@ class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
           ? _value.prevMonthLenth
           : prevMonthLenth // ignore: cast_nullable_to_non_nullable
               as int,
+      currentMonth: null == currentMonth
+          ? _value.currentMonth
+          : currentMonth // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentYear: null == currentYear
+          ? _value.currentYear
+          : currentYear // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentDayNumber: null == currentDayNumber
+          ? _value.currentDayNumber
+          : currentDayNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentday: freezed == currentday
+          ? _value.currentday
+          : currentday // ignore: cast_nullable_to_non_nullable
+              as int?,
       dayName: freezed == dayName
           ? _value.dayName
           : dayName // ignore: cast_nullable_to_non_nullable
@@ -251,6 +525,14 @@ class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
       monthName: freezed == monthName
           ? _value.monthName
           : monthName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentMonthName: freezed == currentMonthName
+          ? _value.currentMonthName
+          : currentMonthName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentDayName: freezed == currentDayName
+          ? _value.currentDayName
+          : currentDayName // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -271,8 +553,14 @@ abstract class _$$CalendarStateImplCopyWith<$Res>
       int dayNumber,
       int currentMonthLenth,
       int prevMonthLenth,
+      int currentMonth,
+      int currentYear,
+      int currentDayNumber,
+      int? currentday,
       String? dayName,
-      String? monthName});
+      String? monthName,
+      String? currentMonthName,
+      String? currentDayName});
 }
 
 /// @nodoc
@@ -292,8 +580,14 @@ class __$$CalendarStateImplCopyWithImpl<$Res>
     Object? dayNumber = null,
     Object? currentMonthLenth = null,
     Object? prevMonthLenth = null,
+    Object? currentMonth = null,
+    Object? currentYear = null,
+    Object? currentDayNumber = null,
+    Object? currentday = freezed,
     Object? dayName = freezed,
     Object? monthName = freezed,
+    Object? currentMonthName = freezed,
+    Object? currentDayName = freezed,
   }) {
     return _then(_$CalendarStateImpl(
       day: null == day
@@ -320,6 +614,22 @@ class __$$CalendarStateImplCopyWithImpl<$Res>
           ? _value.prevMonthLenth
           : prevMonthLenth // ignore: cast_nullable_to_non_nullable
               as int,
+      currentMonth: null == currentMonth
+          ? _value.currentMonth
+          : currentMonth // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentYear: null == currentYear
+          ? _value.currentYear
+          : currentYear // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentDayNumber: null == currentDayNumber
+          ? _value.currentDayNumber
+          : currentDayNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentday: freezed == currentday
+          ? _value.currentday
+          : currentday // ignore: cast_nullable_to_non_nullable
+              as int?,
       dayName: freezed == dayName
           ? _value.dayName
           : dayName // ignore: cast_nullable_to_non_nullable
@@ -327,6 +637,14 @@ class __$$CalendarStateImplCopyWithImpl<$Res>
       monthName: freezed == monthName
           ? _value.monthName
           : monthName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentMonthName: freezed == currentMonthName
+          ? _value.currentMonthName
+          : currentMonthName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentDayName: freezed == currentDayName
+          ? _value.currentDayName
+          : currentDayName // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -342,8 +660,14 @@ class _$CalendarStateImpl extends _CalendarState {
       this.dayNumber = 0,
       this.currentMonthLenth = 0,
       this.prevMonthLenth = 0,
+      this.currentMonth = 0,
+      this.currentYear = 0,
+      this.currentDayNumber = 0,
+      this.currentday = 0,
       this.dayName = '',
-      this.monthName = ''})
+      this.monthName = '',
+      this.currentMonthName = '',
+      this.currentDayName = ''})
       : super._();
 
   @override
@@ -366,14 +690,32 @@ class _$CalendarStateImpl extends _CalendarState {
   final int prevMonthLenth;
   @override
   @JsonKey()
+  final int currentMonth;
+  @override
+  @JsonKey()
+  final int currentYear;
+  @override
+  @JsonKey()
+  final int currentDayNumber;
+  @override
+  @JsonKey()
+  final int? currentday;
+  @override
+  @JsonKey()
   final String? dayName;
   @override
   @JsonKey()
   final String? monthName;
+  @override
+  @JsonKey()
+  final String? currentMonthName;
+  @override
+  @JsonKey()
+  final String? currentDayName;
 
   @override
   String toString() {
-    return 'CalendarState(day: $day, month: $month, year: $year, dayNumber: $dayNumber, currentMonthLenth: $currentMonthLenth, prevMonthLenth: $prevMonthLenth, dayName: $dayName, monthName: $monthName)';
+    return 'CalendarState(day: $day, month: $month, year: $year, dayNumber: $dayNumber, currentMonthLenth: $currentMonthLenth, prevMonthLenth: $prevMonthLenth, currentMonth: $currentMonth, currentYear: $currentYear, currentDayNumber: $currentDayNumber, currentday: $currentday, dayName: $dayName, monthName: $monthName, currentMonthName: $currentMonthName, currentDayName: $currentDayName)';
   }
 
   @override
@@ -390,14 +732,40 @@ class _$CalendarStateImpl extends _CalendarState {
                 other.currentMonthLenth == currentMonthLenth) &&
             (identical(other.prevMonthLenth, prevMonthLenth) ||
                 other.prevMonthLenth == prevMonthLenth) &&
+            (identical(other.currentMonth, currentMonth) ||
+                other.currentMonth == currentMonth) &&
+            (identical(other.currentYear, currentYear) ||
+                other.currentYear == currentYear) &&
+            (identical(other.currentDayNumber, currentDayNumber) ||
+                other.currentDayNumber == currentDayNumber) &&
+            (identical(other.currentday, currentday) ||
+                other.currentday == currentday) &&
             (identical(other.dayName, dayName) || other.dayName == dayName) &&
             (identical(other.monthName, monthName) ||
-                other.monthName == monthName));
+                other.monthName == monthName) &&
+            (identical(other.currentMonthName, currentMonthName) ||
+                other.currentMonthName == currentMonthName) &&
+            (identical(other.currentDayName, currentDayName) ||
+                other.currentDayName == currentDayName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, day, month, year, dayNumber,
-      currentMonthLenth, prevMonthLenth, dayName, monthName);
+  int get hashCode => Object.hash(
+      runtimeType,
+      day,
+      month,
+      year,
+      dayNumber,
+      currentMonthLenth,
+      prevMonthLenth,
+      currentMonth,
+      currentYear,
+      currentDayNumber,
+      currentday,
+      dayName,
+      monthName,
+      currentMonthName,
+      currentDayName);
 
   @JsonKey(ignore: true)
   @override
@@ -414,8 +782,14 @@ abstract class _CalendarState extends CalendarState {
       final int dayNumber,
       final int currentMonthLenth,
       final int prevMonthLenth,
+      final int currentMonth,
+      final int currentYear,
+      final int currentDayNumber,
+      final int? currentday,
       final String? dayName,
-      final String? monthName}) = _$CalendarStateImpl;
+      final String? monthName,
+      final String? currentMonthName,
+      final String? currentDayName}) = _$CalendarStateImpl;
   const _CalendarState._() : super._();
 
   @override
@@ -431,9 +805,21 @@ abstract class _CalendarState extends CalendarState {
   @override
   int get prevMonthLenth;
   @override
+  int get currentMonth;
+  @override
+  int get currentYear;
+  @override
+  int get currentDayNumber;
+  @override
+  int? get currentday;
+  @override
   String? get dayName;
   @override
   String? get monthName;
+  @override
+  String? get currentMonthName;
+  @override
+  String? get currentDayName;
   @override
   @JsonKey(ignore: true)
   _$$CalendarStateImplCopyWith<_$CalendarStateImpl> get copyWith =>

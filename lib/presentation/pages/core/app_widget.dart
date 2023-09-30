@@ -31,7 +31,11 @@ class AppWidget extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 supportedLocales: context.supportedLocales,
                 localizationsDelegates: context.localizationDelegates,
-                home: const CalendarPage(),
+                home: BlocProvider(
+                  create: (context) =>
+                      CalendarBloc()..add(const CalendarEvent.initDate()),
+                  child: const CalendarPage(),
+                ),
               );
             },
           );
