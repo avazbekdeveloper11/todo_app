@@ -1,10 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
 import 'package:todo_app/presentation/components/buttons/custom_buttons.dart';
 import 'package:todo_app/presentation/styles/theme_warpper.dart';
 
 class AppbarWidget extends StatelessWidget {
+  final CalendarState state;
   const AppbarWidget({
     super.key,
+    required this.state,
   });
 
   @override
@@ -20,11 +24,11 @@ class AppbarWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Sunday',
+                state.dayName ?? '',
                 style: fonts.semiBold14,
               ),
               Text(
-                '28 September 2021',
+                '${state.day} ${DateFormat.MMMM().format(DateTime(state.month, state.month))} ${state.year}',
                 style: fonts.regular12.copyWith(fontSize: 10),
               ),
             ],

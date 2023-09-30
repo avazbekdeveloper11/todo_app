@@ -14,6 +14,9 @@ dependencies:
     sdk: flutter
   # Infrastructure
   provider: ^6.0.1
+  freezed: ^2.4.1
+  freezed_annotation: ^2.1.0
+  flutter_bloc: ^8.0.1
 
   # ui
   cupertino_icons: ^1.0.2
@@ -22,12 +25,15 @@ dependencies:
   shared_preferences: ^2.2.1
   flutter_svg: ^2.0.7
   progress_indicators: ^1.0.0
+  bloc: ^8.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  built_value_generator: ^8.6.3
 
 flutter:
   uses-material-design: true

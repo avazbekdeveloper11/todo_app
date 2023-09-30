@@ -7,9 +7,7 @@ import 'package:todo_app/presentation/styles/theme.dart';
 import 'package:todo_app/presentation/styles/theme_warpper.dart';
 
 class DetailAppbarWidget extends StatelessWidget {
-  const DetailAppbarWidget({
-    super.key,
-  });
+  const DetailAppbarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -45,6 +45,8 @@ class CustomColorSet {
 
   final Color redLight;
 
+  final Color textColor2;
+
   CustomColorSet._({
     required this.text,
     required this.bodyText,
@@ -68,6 +70,7 @@ class CustomColorSet {
     required this.filledColor,
     required this.subtitle,
     required this.redLight,
+    required this.textColor2,
   });
 
   factory CustomColorSet._create(CustomThemeMode mode) {
@@ -117,6 +120,8 @@ class CustomColorSet {
 
     const redLight = Style.redLight;
 
+    const textColor2 = Style.textColor2;
+
     return CustomColorSet._(
       green: green,
       black: black,
@@ -140,6 +145,7 @@ class CustomColorSet {
       filledColor: filledColor,
       subtitle: subtitle,
       redLight: redLight,
+      textColor2: textColor2,
     );
   }
 

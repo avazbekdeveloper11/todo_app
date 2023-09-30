@@ -41,6 +41,8 @@ class Style {
 
   static const Color redLight = Color(0XFFFEE8E9);
 
+  static const Color textColor2 = Color(0XFF969696);
+
   static const BoxShadow blueIconShadow = BoxShadow(
     color: Color(0x20696A6F),
     blurRadius: 12,

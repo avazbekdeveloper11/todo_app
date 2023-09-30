@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
 import 'package:todo_app/domain/common/app_init.dart';
+
 import 'presentation/pages/core/app_widget.dart';
 
 void main() async {
@@ -16,7 +19,11 @@ void main() async {
           supportedLocales: const [Locale('en', 'US')],
           path: 'assets/translation',
           fallbackLocale: const Locale('en', 'US'),
-          child: const AppWidget(),
+          child: BlocProvider(
+            create: (context) =>
+                CalendarBloc()..add(const CalendarEvent.initDate()),
+            child: const AppWidget(),
+          ),
         );
       },
     ),

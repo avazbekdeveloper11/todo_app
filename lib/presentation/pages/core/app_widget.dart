@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
 import 'package:todo_app/infrastructure/services/shared_pref_service.dart';
 import 'package:todo_app/presentation/pages/calendar_page/calendar_page.dart';
-import 'package:todo_app/presentation/styles/theme.dart';
 import 'package:todo_app/presentation/pages/core/splash_screen.dart';
+import 'package:todo_app/presentation/styles/theme.dart';
 
 class AppWidget extends StatelessWidget {
   final Uri? uri;

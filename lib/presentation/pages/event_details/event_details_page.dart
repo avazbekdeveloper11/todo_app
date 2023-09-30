@@ -71,7 +71,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
               titleColor: colors.black,
               verticalPadding: 12.h,
               title: 'delete_event'.tr(),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {});
+              },
             ),
           ),
         );
