@@ -34,6 +34,7 @@ class CustomTextField extends StatefulWidget {
   final Color? borderColor;
   final String? Function(String? value)? validator;
   final AutovalidateMode? autovalidateMode;
+  final bool? enabled;
 
   const CustomTextField({
     Key? key,
@@ -66,6 +67,7 @@ class CustomTextField extends StatefulWidget {
     this.autoFox,
     this.validator,
     this.autovalidateMode,
+    this.enabled,
   }) : super(key: key);
 
   @override
@@ -113,6 +115,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ? SizedBox(height: 6.h)
               : const SizedBox(),
           TextFormField(
+            enabled: widget.enabled,
             validator: widget.validator,
             autovalidateMode: widget.autovalidateMode,
             autofocus: widget.autoFox ?? false,
@@ -128,7 +131,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             maxLines: widget.maxLines,
             textAlignVertical: widget.textAlignVertical,
             controller: widget.controller,
-            style: fonts.medium16.copyWith(color: colors.text),
+            style: fonts.regular14.copyWith(color: colors.text),
             obscureText: widget.obscureText,
             keyboardType: widget.keyboardType,
             decoration: InputDecoration(
@@ -159,6 +162,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   width: 1,
                 ),
               ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(
+                  color: widget.borderColor ?? colors.transparent,
+                  width: 1,
+                ),
+              ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
                 borderSide: BorderSide(
@@ -166,8 +176,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   width: 1,
                 ),
               ),
+              hintStyle: widget.hintStyle ??
+                  fonts.regular14.copyWith(
+                    color: colors.textColor2,
+                  ),
               hintText: widget.hintText,
-              hintStyle: widget.hintStyle ?? fonts.medium16,
               errorText: widget.error,
               errorStyle: fonts.regular12.copyWith(color: colors.error),
               contentPadding:

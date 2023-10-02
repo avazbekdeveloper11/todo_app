@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
 import 'package:todo_app/infrastructure/services/shared_pref_service.dart';
@@ -28,12 +29,14 @@ class AppWidget extends StatelessWidget {
             builder: (BuildContext context, _) {
               return MaterialApp(
                 locale: context.locale,
+                builder: EasyLoading.init(),
                 debugShowCheckedModeBanner: false,
                 supportedLocales: context.supportedLocales,
                 localizationsDelegates: context.localizationDelegates,
                 home: BlocProvider(
-                  create: (context) =>
-                      CalendarBloc()..add(const CalendarEvent.initDate()),
+                  create: (context) => CalendarBloc()
+                    ..add(const CalendarEvent.initDate())
+                    ..add(const CalendarEvent.getAllTodo()),
                   child: const CalendarPage(),
                 ),
               );

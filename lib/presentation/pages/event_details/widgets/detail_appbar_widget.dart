@@ -2,17 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:todo_app/infrastructure/models/todo_model.dart';
 import 'package:todo_app/presentation/routes/routes.dart';
 import 'package:todo_app/presentation/styles/theme.dart';
 import 'package:todo_app/presentation/styles/theme_warpper.dart';
 
 class DetailAppbarWidget extends StatelessWidget {
-  const DetailAppbarWidget({super.key});
+  final TodoModel todoModel;
+  const DetailAppbarWidget({super.key, required this.todoModel});
 
   @override
   Widget build(BuildContext context) {
     return ThemeWrapper(
-      builder: (context, colors, fonts, icons, controller) {
+      builder: (ctx, colors, fonts, icons, controller) {
         return Container(
           width: 1.sw,
           height: (248 + MediaQuery.of(context).viewInsets.top).h,
@@ -41,9 +43,9 @@ class DetailAppbarWidget extends StatelessWidget {
                       ),
                       //
                       InkWell(
-                        onTap: () => Navigator.push(
+                        onTap: () => Navigator.pushReplacement(
                           context,
-                          Routes.getAddEventPage(),
+                          Routes.getAddEventPage(context, todoModel),
                         ),
                         child: Row(
                           children: [
@@ -63,14 +65,15 @@ class DetailAppbarWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
                 Text(
-                  'Watching Football',
+                  todoModel.name ?? '',
                   style: fonts.semiBold16.copyWith(
                     color: colors.white,
                     fontSize: 26.sp,
                   ),
                 ),
                 Text(
-                  'Manchester United vs Arsenal (Premiere League)',
+                  todoModel.description ?? '...',
+                  maxLines: 1,
                   style: fonts.regular12.copyWith(
                     color: colors.white,
                     fontSize: 8.sp,
@@ -79,14 +82,14 @@ class DetailAppbarWidget extends StatelessWidget {
                 SizedBox(height: 12.h),
                 rowTile(
                   icon: icons.clock,
-                  text: '17:00 - 18:30',
+                  text: todoModel.time ?? '--:--',
                   fonts: fonts,
                   colors: colors,
                 ),
                 SizedBox(height: 12.h),
                 rowTile(
                   icon: icons.location,
-                  text: 'Stamford Bridge',
+                  text: todoModel.location ?? '...',
                   fonts: fonts,
                   colors: colors,
                 ),

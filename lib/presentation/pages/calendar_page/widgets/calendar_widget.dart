@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
+import 'package:todo_app/infrastructure/extensions/extensions.dart';
+import 'package:todo_app/infrastructure/models/todo_model.dart';
 import 'package:todo_app/presentation/components/buttons/custom_buttons.dart';
 import 'package:todo_app/presentation/styles/theme_warpper.dart';
 
@@ -19,6 +21,7 @@ class CalendarWiget extends StatefulWidget {
 class _CalendarWigetState extends State<CalendarWiget> {
   List months = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   Timer? _searchTimer;
+  late List<TodoModel> todoList;
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +117,74 @@ class _CalendarWigetState extends State<CalendarWiget> {
                       (widget.state.currentMonthLenth +
                               (widget.state.dayNumber - 1)) >
                           index) {
+                    bool currentDate =
+                        widget.state.year == widget.state.currentYear &&
+                            widget.state.currentMonth == widget.state.month &&
+                            widget.state.currentday ==
+                                (index - (widget.state.dayNumber - 2));
+
+                    bool isSelected = (index - (widget.state.dayNumber - 2)) ==
+                            widget.state.selectedDay &&
+                        widget.state.month == widget.state.selectedMonth &&
+                        widget.state.year == widget.state.selectedYear;
+                    todoList = widget.state.toDoForCheck?[
+                            "${widget.state.year}-${widget.state.month}-${index - (widget.state.dayNumber - 2)}"] ??
+                        [];
+
                     return GestureDetector(
-                      child: Center(
-                        child: Text(
-                          '${index - (widget.state.dayNumber - 2)}',
-                          style: fonts.medium14.copyWith(fontSize: 12.sp),
-                        ),
+                      onTap: () {
+                        context.read<CalendarBloc>().add(
+                              CalendarEvent.selectDate(
+                                selectedMonth: widget.state.month,
+                                selectedYear: widget.state.year,
+                                selectedDay:
+                                    (index - (widget.state.dayNumber - 2)),
+                              ),
+                            );
+                      },
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(10.sp),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isSelected
+                                    ? colors.primary
+                                    : colors.transparent,
+                              ),
+                              color: currentDate
+                                  ? colors.primary
+                                  : colors.transparent,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${index - (widget.state.dayNumber - 2)}',
+                                style: fonts.medium14.copyWith(
+                                  fontSize: 12.sp,
+                                  color:
+                                      currentDate ? colors.white : colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            child: todoList.isNotEmpty
+                                ? Wrap(
+                                    spacing: 4.w,
+                                    children: List.generate(
+                                      todoList.length > 3 ? 3 : todoList.length,
+                                      (i) => CircleAvatar(
+                                        radius: 2.r,
+                                        backgroundColor:
+                                            HexColor.fromHex(todoList[i].color),
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          )
+                        ],
                       ),
                     );
                   } else {
@@ -151,6 +216,7 @@ class _CalendarWigetState extends State<CalendarWiget> {
   @override
   void initState() {
     _searchTimer = Timer(Duration.zero, () {});
+    todoList = [];
     super.initState();
   }
 }

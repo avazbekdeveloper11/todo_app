@@ -11,7 +11,7 @@ class AddEventWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeWrapper(
-      builder: (context, colors, fonts, icons, controller) {
+      builder: (ctx, colors, fonts, icons, controller) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 28.w),
           child: Row(
@@ -26,7 +26,7 @@ class AddEventWidget extends StatelessWidget {
                 title: 'add_event'.tr(),
                 onPressed: () => Navigator.push(
                   context,
-                  Routes.getAddEventPage(),
+                  Routes.getAddEventPage(context),
                 ),
               )
             ],

@@ -10,5 +10,8 @@
   "schedule": "Schedule",
   "save": "Save",
   "delete_event": "Delete Event",
-  "reminder": "Reminder"
+  "reminder": "Reminder",
+  "input_required": "Input is required",
+  "success": "Success",
+  "no_data":"No Data"
 }
