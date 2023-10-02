@@ -42,8 +42,8 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     int month = state.month - 1;
     String dayName = DateFormat('EEEE')
         .format(dateTime.copyWith(day: 1, month: month, year: year));
-    int currentMonthLenth = DateTime(year, dateTime.month + 1, 0).day;
-
+    int currentMonthLenth =
+        DateTime(year, DateTime(year, month).month + 1, 0).day;
     int prevMonthLenth =
         DateTime(year, DateTime(year, month - 1).month - 1, 0).day;
 
@@ -85,8 +85,27 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         toDo[el.date ?? "0"] = [el];
       }
     }
+    int currentMonthLenth =
+        DateTime(state.selectedYear, state.selectedMonth + 1, 0).day;
 
-    emit(state.copyWith(toDoForCheck: toDo));
+    int prevMonthLenth = DateTime(state.selectedYear,
+            DateTime(state.selectedYear, state.selectedMonth - 1).month - 1, 0)
+        .day;
+
+    String firstDayName = DateFormat('EEEE')
+        .format(DateTime(state.selectedYear, state.selectedMonth, 1));
+    int dayNumber = getDayNumber(firstDayName);
+
+    emit(state.copyWith(
+      dropDownValue: '#009FEE',
+      currentMonthLenth: currentMonthLenth,
+      prevMonthLenth: prevMonthLenth,
+      toDoForCheck: toDo,
+      dayNumber: dayNumber,
+      day: state.selectedDay,
+      month: state.selectedMonth,
+      year: state.selectedYear,
+    ));
   }
 
   FutureOr<void> _getByDate(event, Emitter<CalendarState> emit) async {
@@ -111,8 +130,11 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             DateTime(dateTime.year, dateTime.month - 1).month + 1, 0)
         .day;
 
-    String dayName = DateFormat('EEEE').format(dateTime.copyWith(day: 1));
-    int dayNumber = getDayNumber(dayName);
+    String dayName =
+        DateFormat('EEEE').format(dateTime.copyWith(day: dateTime.day));
+    String firstDayName = DateFormat('EEEE').format(dateTime.copyWith(day: 1));
+
+    int dayNumber = getDayNumber(firstDayName);
     emit(
       state.copyWith(
         day: dateTime.day,
@@ -142,7 +164,8 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     int month = state.month + 1;
     String dayName = DateFormat('EEEE')
         .format(dateTime.copyWith(day: 1, month: month, year: year));
-    int currentMonthLenth = DateTime(year, dateTime.month + 1, 0).day;
+    int currentMonthLenth =
+        DateTime(year, DateTime(year, month).month + 1, 0).day;
 
     int prevMonthLenth =
         DateTime(year, DateTime(year, month - 1).month + 1, 0).day;

@@ -47,11 +47,11 @@ class _CalendarWigetState extends State<CalendarWiget> {
                     ),
                     style: fonts.semiBold14,
                   ),
+                  const Spacer(),
                   Text(
-                    widget.state.year.toString(),
+                    "${widget.state.year}   ",
                     style: fonts.semiBold14,
                   ),
-                  const Spacer(),
                   CustomCircleButton(
                     onTap: () {
                       context.read<CalendarBloc>().add(
