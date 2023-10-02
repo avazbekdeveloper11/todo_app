@@ -47,6 +47,10 @@ class _CalendarWigetState extends State<CalendarWiget> {
                     ),
                     style: fonts.semiBold14,
                   ),
+                  Text(
+                    widget.state.year.toString(),
+                    style: fonts.semiBold14,
+                  ),
                   const Spacer(),
                   CustomCircleButton(
                     onTap: () {

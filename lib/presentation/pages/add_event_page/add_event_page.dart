@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
 import 'package:todo_app/infrastructure/extensions/extensions.dart';
 import 'package:todo_app/infrastructure/models/todo_model.dart';
-import 'package:todo_app/infrastructure/services/db_service.dart';
+import 'package:todo_app/infrastructure/services/local_db.dart';
 import 'package:todo_app/presentation/components/buttons/custom_buttons.dart';
 import 'package:todo_app/presentation/components/custom_text_field.dart';
 import 'package:todo_app/presentation/components/un_focus.dart';
@@ -193,7 +193,6 @@ class _AddEventPageState extends State<AddEventPage> {
                       title: 'save'.tr(),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          print(locationController.text);
                           TodoModel todoModel = TodoModel(
                             time: timeController.text == ''
                                 ? '${DateTime.now().hour}:${DateTime.now().minute.toString().length == 1 ? 0 : ''}${DateTime.now().minute}'

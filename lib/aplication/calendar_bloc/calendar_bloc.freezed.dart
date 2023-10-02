@@ -1500,8 +1500,8 @@ class _$CalendarStateImpl extends _CalendarState {
       this.selectedDay = 0,
       this.selectedMonth = 0,
       this.selectedYear = 0,
-      final List<TodoModel>? todoModelList = const [],
-      final Map<String, List<TodoModel>>? toDoForCheck = const {}})
+      final List<TodoModel>? todoModelList = null,
+      final Map<String, List<TodoModel>>? toDoForCheck = null})
       : _todoModelList = todoModelList,
         _toDoForCheck = toDoForCheck,
         super._();

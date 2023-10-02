@@ -24,8 +24,7 @@ class CalendarState with _$CalendarState {
     @Default(0) int selectedDay,
     @Default(0) int selectedMonth,
     @Default(0) int selectedYear,
-    @Default([]) List<TodoModel>? todoModelList,
-    @Default({}) Map<String, List<TodoModel>>? toDoForCheck,
-    // @Default(null) TodoModel? todoModel,
+    @Default(null) List<TodoModel>? todoModelList,
+    @Default(null) Map<String, List<TodoModel>>? toDoForCheck,
   }) = _CalendarState;
 }

@@ -5,7 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
 import 'package:todo_app/infrastructure/models/todo_model.dart';
-import 'package:todo_app/infrastructure/services/db_service.dart';
+import 'package:todo_app/infrastructure/services/local_db.dart';
 import 'package:todo_app/presentation/components/buttons/custom_buttons.dart';
 import 'package:todo_app/presentation/pages/event_details/widgets/detail_appbar_widget.dart';
 import 'package:todo_app/presentation/styles/theme_warpper.dart';

@@ -2,10 +2,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:todo_app/infrastructure/services/db_service.dart';
 import 'package:todo_app/presentation/styles/style.dart';
 
 class AppInit {
-  Future<void> appInitialized() async {
+  static DBService? dbService;
+  AppInit._();
+
+  static Future<AppInit> get create async {
+    await appInitialized();
+
+    dbService ??= await DBService.create;
+    return AppInit._();
+  }
+
+  static Future<void> appInitialized() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     await EasyLocalization.ensureInitialized();

@@ -1,29 +1,25 @@
 part of 'theme.dart';
 
 class _ThemePreference {
-  final SharedPreferences _preferences;
+  final DBService _dbService;
 
-  static const prefKey = 'theme_mode';
+  _ThemePreference._(this._dbService);
 
-  _ThemePreference._(this._preferences);
-
-  static Future<_ThemePreference> get create async {
-    final preference = await SharedPreferences.getInstance();
-    return _ThemePreference._(preference);
+  static _ThemePreference create(DBService dbService) {
+    return _ThemePreference._(dbService);
   }
 
   CustomThemeMode getMode() {
-    final modeKey = _preferences.getString(_ThemePreference.prefKey) ??
-        CustomThemeMode.light.toKey;
+    final modeKey = _dbService.getThemeMode ?? CustomThemeMode.light.toKey;
 
     return CustomThemeModeX.toValue(modeKey);
   }
 
   Future<void> setMode(CustomThemeMode mode) async {
-    await _preferences.setString(_ThemePreference.prefKey, mode.toKey);
+    await _dbService.setThemeMode(mode.toKey);
   }
 
   Future<void> clean() async {
-    await _preferences.clear();
+    _dbService.signOut();
   }
 }

@@ -1,19 +1,20 @@
-import 'package:todo_app/presentation/styles/custom_theme_mode.dart';
-import 'package:todo_app/presentation/styles/custom_theme_mode_ext.dart';
-import 'package:todo_app/presentation/styles/style.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/presentation/styles/style.dart';
+import '../../infrastructure/services/db_service.dart';
+import './custom_theme_mode.dart';
+import './custom_theme_mode_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 part 'color_set.dart';
+
 part 'icon_set.dart';
+
 part 'font_set.dart';
+
 part 'theme_preference.dart';
 
-enum Localization { ru, uz, en }
-
 class GridTheme with ChangeNotifier {
-  final _ThemePreference _preference;
+  final _ThemePreference _dbService;
   final IconSet _iconSet;
   FontSet _fontSet;
   CustomColorSet _colorSet;
@@ -29,11 +30,11 @@ class GridTheme with ChangeNotifier {
 
   FontSet get fonts => _fontSet;
 
-  GridTheme._(this._colorSet, this._preference, this._mode, this._iconSet,
+  GridTheme._(this._colorSet, this._dbService, this._mode, this._iconSet,
       this._fontSet);
 
-  static Future<GridTheme> get create async {
-    final themePreference = await _ThemePreference.create;
+  static GridTheme create(DBService dbService) {
+    final themePreference = _ThemePreference.create(dbService);
     final mode = themePreference.getMode();
     final colorSet = CustomColorSet.createOrUpdate(mode);
     final iconSet = IconSet.create;
@@ -57,7 +58,7 @@ class GridTheme with ChangeNotifier {
   }
 
   Future<void> clean() async {
-    await _preference.clean();
+    await _dbService.clean();
   }
 
   Future<void> toggle() async {
@@ -73,6 +74,6 @@ class GridTheme with ChangeNotifier {
     _fontSet = FontSet.createOrUpdate(_colorSet);
     _mode = mode;
     notifyListeners();
-    await _preference.setMode(mode);
+    await _dbService.setMode(mode);
   }
 }

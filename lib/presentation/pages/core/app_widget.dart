@@ -3,54 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/aplication/calendar_bloc/calendar_bloc.dart';
-import 'package:todo_app/infrastructure/services/shared_pref_service.dart';
-import 'package:todo_app/presentation/pages/calendar_page/calendar_page.dart';
-import 'package:todo_app/presentation/pages/core/splash_screen.dart';
+import 'package:todo_app/infrastructure/services/db_service.dart';
+import 'package:todo_app/presentation/routes/routes.dart';
 import 'package:todo_app/presentation/styles/theme.dart';
 
 class AppWidget extends StatelessWidget {
-  final Uri? uri;
-  const AppWidget({Key? key, this.uri}) : super(key: key);
+  final DBService dbService;
+  const AppWidget({Key? key, required this.dbService}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Future.wait([
-        PreferenceService.create,
-        GridTheme.create,
-      ]),
-      builder: (context, AsyncSnapshot<List<dynamic>> snap) {
-        if (snap.hasData && snap.data is List<dynamic>) {
-          final data = snap.data;
-          final GridTheme theme = data?[1];
-          return ChangeNotifierProvider(
-            create: (_) => theme,
-            builder: (BuildContext context, _) {
-              return MaterialApp(
-                locale: context.locale,
-                builder: EasyLoading.init(),
-                debugShowCheckedModeBanner: false,
-                supportedLocales: context.supportedLocales,
-                localizationsDelegates: context.localizationDelegates,
-                home: BlocProvider(
-                  create: (context) => CalendarBloc()
-                    ..add(const CalendarEvent.initDate())
-                    ..add(const CalendarEvent.getAllTodo()),
-                  child: const CalendarPage(),
-                ),
-              );
-            },
-          );
-        } else {
-          return const MediaQuery(
-            data: MediaQueryData(),
-            child: MaterialApp(
+    return ChangeNotifierProvider(
+      create: (_) => GridTheme.create(dbService),
+      builder: (BuildContext ctx, _) {
+        return RepositoryProvider(
+          create: (context) => dbService,
+          child: Builder(builder: (context) {
+            return MaterialApp(
+              locale: context.locale,
+              builder: EasyLoading.init(),
               debugShowCheckedModeBanner: false,
-              home: SplashScreen(),
-            ),
-          );
-        }
+              supportedLocales: context.supportedLocales,
+              localizationsDelegates: context.localizationDelegates,
+              onGenerateRoute: (settings) =>
+                  Routes.onGenerateRoute(context: context),
+            );
+          }),
+        );
       },
     );
   }

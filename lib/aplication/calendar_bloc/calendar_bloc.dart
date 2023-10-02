@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:todo_app/infrastructure/models/todo_model.dart';
-import 'package:todo_app/infrastructure/services/db_service.dart';
+import 'package:todo_app/infrastructure/services/local_db.dart';
 
 part 'calendar_bloc.freezed.dart';
 part 'calendar_event.dart';
@@ -72,14 +72,6 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     return emit(state.copyWith(dropDownValue: event.dropDownValue));
   }
 
-  FutureOr<void> _getByDate(event, Emitter<CalendarState> emit) async {
-    List<TodoModel> model = await LocalDatabase.getByDate(
-      '${state.selectedYear}-${state.selectedMonth}-${state.selectedDay}',
-    );
-
-    return emit(state.copyWith(todoModelList: model));
-  }
-
   Future<void> _getAllToDo(
     _GetAllToDo event,
     Emitter<CalendarState> emit,
@@ -95,6 +87,14 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     }
 
     emit(state.copyWith(toDoForCheck: toDo));
+  }
+
+  FutureOr<void> _getByDate(event, Emitter<CalendarState> emit) async {
+    List<TodoModel> model = await LocalDatabase.getByDate(
+      '${state.selectedYear}-${state.selectedMonth}-${state.selectedDay}',
+    );
+
+    return emit(state.copyWith(todoModelList: model));
   }
 
   void _initDate(
@@ -113,8 +113,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
 
     String dayName = DateFormat('EEEE').format(dateTime.copyWith(day: 1));
     int dayNumber = getDayNumber(dayName);
-
-    return emit(
+    emit(
       state.copyWith(
         day: dateTime.day,
         month: dateTime.month,
