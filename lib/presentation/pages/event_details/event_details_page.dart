@@ -10,9 +10,17 @@ import 'package:todo_app/presentation/components/buttons/custom_buttons.dart';
 import 'package:todo_app/presentation/pages/event_details/widgets/detail_appbar_widget.dart';
 import 'package:todo_app/presentation/styles/theme_warpper.dart';
 
-class EventDetailsPage extends StatelessWidget {
+class EventDetailsPage extends StatefulWidget {
   final TodoModel todoModel;
   const EventDetailsPage({super.key, required this.todoModel});
+
+  @override
+  State<EventDetailsPage> createState() => _EventDetailsPageState();
+}
+
+class _EventDetailsPageState extends State<EventDetailsPage> {
+  String? desc;
+  String? time;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +31,7 @@ class EventDetailsPage extends StatelessWidget {
             return Scaffold(
               body: Column(
                 children: [
-                  DetailAppbarWidget(todoModel: todoModel),
+                  DetailAppbarWidget(todoModel: widget.todoModel),
                   //
                   Padding(
                     padding: EdgeInsets.only(top: 18.h, bottom: 14.h),
@@ -35,7 +43,7 @@ class EventDetailsPage extends StatelessWidget {
                       subtitle: Padding(
                         padding: EdgeInsets.only(top: 10.h),
                         child: Text(
-                          todoModel.time ?? '...',
+                          time ?? widget.todoModel.time ?? '...',
                           style: fonts.medium16.copyWith(
                             color: colors.subtitle,
                           ),
@@ -52,7 +60,7 @@ class EventDetailsPage extends StatelessWidget {
                     subtitle: Padding(
                       padding: EdgeInsets.only(top: 10.h),
                       child: Text(
-                        todoModel.description ?? '...',
+                        desc ?? widget.todoModel.description ?? '...',
                         style: fonts.regular12.copyWith(
                           fontSize: 10.sp,
                           color: colors.subtitle,
@@ -85,7 +93,7 @@ class EventDetailsPage extends StatelessWidget {
   }
 
   void deleteTodo(BuildContext context) async {
-    await LocalDatabase.deleteTodoById(todoModel.id!).then((value) {
+    await LocalDatabase.deleteTodoById(widget.todoModel.id!).then((value) {
       context.read<CalendarBloc>()
         ..add(const CalendarEvent.getByDate())
         ..add(const CalendarEvent.getAllTodo());

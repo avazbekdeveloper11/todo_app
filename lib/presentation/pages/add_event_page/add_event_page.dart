@@ -29,7 +29,7 @@ class _AddEventPageState extends State<AddEventPage> {
   late TextEditingController timeController;
   late List<Map<String, String>> dropDownItems;
   late GlobalKey<FormState> _formKey;
-  late bool isSelected;
+  bool isSelected = false;
   AutovalidateMode? autovalidateMode;
 
   @override
@@ -135,10 +135,10 @@ class _AddEventPageState extends State<AddEventPage> {
                             ),
                             child: DropdownButton(
                               underline: const SizedBox(),
-                              value: widget.todoModel == null && !isSelected
-                                  ? widget.todoModel?.color ??
-                                      state.dropDownValue
-                                  : state.dropDownValue,
+                              value: isSelected
+                                  ? state.dropDownValue
+                                  : widget.todoModel?.color ??
+                                      state.dropDownValue,
                               borderRadius: BorderRadius.circular(8.r),
                               icon: SvgPicture.asset(icons.chevronDown),
                               items: List.generate(
@@ -254,6 +254,10 @@ class _AddEventPageState extends State<AddEventPage> {
   }
 
   void getTime() async {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
     await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -283,7 +287,6 @@ class _AddEventPageState extends State<AddEventPage> {
     locationController =
         TextEditingController(text: widget.todoModel?.location);
     timeController = TextEditingController(text: widget.todoModel?.time);
-    isSelected = widget.todoModel == null ? true : false;
     dropDownItems = [
       {
         'value': '#009FEE',

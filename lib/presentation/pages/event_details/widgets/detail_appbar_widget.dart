@@ -7,10 +7,18 @@ import 'package:todo_app/presentation/routes/routes.dart';
 import 'package:todo_app/presentation/styles/theme.dart';
 import 'package:todo_app/presentation/styles/theme_warpper.dart';
 
-class DetailAppbarWidget extends StatelessWidget {
+class DetailAppbarWidget extends StatefulWidget {
   final TodoModel todoModel;
-  const DetailAppbarWidget({super.key, required this.todoModel});
+  const DetailAppbarWidget({
+    super.key,
+    required this.todoModel,
+  });
 
+  @override
+  State<DetailAppbarWidget> createState() => _DetailAppbarWidgetState();
+}
+
+class _DetailAppbarWidgetState extends State<DetailAppbarWidget> {
   @override
   Widget build(BuildContext context) {
     return ThemeWrapper(
@@ -43,10 +51,12 @@ class DetailAppbarWidget extends StatelessWidget {
                       ),
                       //
                       InkWell(
-                        onTap: () => Navigator.pushReplacement(
+                        onTap: () => Navigator.push(
                           context,
-                          Routes.getAddEventPage(context, todoModel),
-                        ),
+                          Routes.getAddEventPage(context, widget.todoModel),
+                        ).then((value) {
+                          Navigator.pop(context);
+                        }),
                         child: Row(
                           children: [
                             SvgPicture.asset(icons.edit),
@@ -65,14 +75,14 @@ class DetailAppbarWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
                 Text(
-                  todoModel.name ?? '',
+                  widget.todoModel.name ?? '',
                   style: fonts.semiBold16.copyWith(
                     color: colors.white,
                     fontSize: 26.sp,
                   ),
                 ),
                 Text(
-                  todoModel.description ?? '...',
+                  widget.todoModel.description ?? '...',
                   maxLines: 1,
                   style: fonts.regular12.copyWith(
                     color: colors.white,
@@ -82,14 +92,14 @@ class DetailAppbarWidget extends StatelessWidget {
                 SizedBox(height: 12.h),
                 rowTile(
                   icon: icons.clock,
-                  text: todoModel.time ?? '--:--',
+                  text: widget.todoModel.time ?? '--:--',
                   fonts: fonts,
                   colors: colors,
                 ),
                 SizedBox(height: 12.h),
                 rowTile(
                   icon: icons.location,
-                  text: todoModel.location ?? '...',
+                  text: widget.todoModel.location ?? '...',
                   fonts: fonts,
                   colors: colors,
                 ),
